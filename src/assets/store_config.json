@@ -1,5 +1,5 @@
 {
-  "store_name": "My Awesome Store",
+  "store_name": "Vape House",
   "store_slug": "react-stripe-store",
   "api_key": "{STRIPE_PUBLIC_KEY}",
   "colors":

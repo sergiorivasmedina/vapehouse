@@ -85,11 +85,12 @@ function ProductList(props) {
       { products.map((product,i) => {
         return <Link key={i} to={`/product/${product.url}`}>
           <ImgWrapper borderColor={props.theme.palette.secondary.main}>
-            <LargeIMG img={`../photos/${product.url}/${product.photos[0]}`}/>
+            <LargeIMG img="https://images-na.ssl-images-amazon.com/images/I/51ZAEutpmQL._SX425_.jpg"/>
           </ImgWrapper>
           <Title>
             {product.name}
-            <Price>${product.price}</Price>
+            {/* <Price>${product.price}</Price> */}
+            <Price>S/. 1500</Price>
           </Title>
         </Link>
       })}
