@@ -26,7 +26,7 @@ const Landing = ({ config }) => (
     <Paper style={{ padding: "40px" }}>
       <Hero>
         <div style={{ display: "inline-block", maxWidth: "80%"}}>
-          <h1>Los mejores vapes y líquidos del mercado (DarioRock)</h1>
+          <h1>Los mejores vapes y líquidos del mercado</h1>
         </div>
       </Hero>
       <Divider style={{ margin: "40px 0" }}/>
