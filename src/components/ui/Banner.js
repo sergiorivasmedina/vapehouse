@@ -38,16 +38,21 @@ const Banner = ({ classes, quantity, config, width }) => {
 
   const number = quantity ? ` (${quantity})` : "";
 
-  const productLink = <Link to={`/product`} style={{flex: 1}} className={classes.menuButton}>
-    <Typography variant="button" gutterBottom>Shop</Typography>
+  const productLink = <Link to={`/product`} className={classes.menuButton}>
+    <Typography variant="button" gutterBottom>Productos</Typography>
+  </Link>
+
+  const aboutLink = <Link to={`/nosotros`} style={{flex: 1}} className={classes.menuButton}>
+    <Typography variant="button" gutterBottom>Nosotros</Typography>
   </Link>
 
   let menu;
   if (isWidthDown('sm', width)) {
-    menu = <BannerHamburger productLink={productLink} number={number} />
+    menu = <BannerHamburger productLink={productLink} aboutLink={aboutLink} number={number} />
   } else {
     menu = (<span className={classes.buttons}>
         { productLink }
+        { aboutLink }
         <Link to={`/cart`} className={classes.menuButton} style={{ marginRight: 0 }}>
           <Typography variant="button" gutterBottom>Cart{number}</Typography>
         </Link>
@@ -58,6 +63,7 @@ const Banner = ({ classes, quantity, config, width }) => {
     <div className={classes.root}>
       <AppBar position="static" color="secondary" className={classes.appbar}>
         <Toolbar>
+        <a href="/"><img src="https://scontent.ftru1-1.fna.fbcdn.net/v/t1.0-1/60037162_649519088826302_5712132072173207552_n.jpg?_nc_cat=101&_nc_sid=dbb9e7&_nc_ohc=vbrCqP6FOisAX9_lRLx&_nc_ht=scontent.ftru1-1.fna&oh=259adadc03551f6fb488b501fea43260&oe=5EC059B8" alt="Vapehouse_logo" width="50" height="50"></img></a>
           <Link to={`/`} className={classes.menuButton}>
             <div className="logo" />
             <h3 className={classes.storeName}>{config.store_name}</h3>
