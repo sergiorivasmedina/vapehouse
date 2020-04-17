@@ -1,13 +1,4 @@
-## ⚠️ This project has moved over to [Beluga](https://github.com/binx/beluga) ⚠️
-
-Beluga has all of the same functionality as this project, plus these features:
-- Store backend UI to automate product creation and store theming
-- Collections to organize products
-- Paid shipping options
-- About page
-
-Check out [belugajs.com](https://belugajs.com/) for documentation, tutorials, and a gallery.
-
+## VAPE HOUSE PROJECT
 
 ## React + Stripe Ecommerce Store Template
 
@@ -19,15 +10,11 @@ Uses [Material-UI](http://material-ui.com/) and [styled-components](https://www.
 
 Site also includes a password-protected admin view, Nodemailer integration for sending order updates, and email templates built with Handlebars.
 
-### Demo
-[Demo of store](https://www.gpxjewelry.com/) - with some extra visualization magic on top :)
-
 ### Quickstart
 ```
 yarn install
 yarn start
 ```
-This will open a browser tab with the store running. The config file in `/src/assets/` will be running the store, and at first you should see one product. The `$Infinity - $-Infinity` price tag is notifying us that there is an error connecting to the Stripe account, which we hope would be true since we haven't set a stripe key or a stripe product ID yet!
 
 ### Store Config Philosophy
 
