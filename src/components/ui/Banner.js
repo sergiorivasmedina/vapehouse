@@ -17,14 +17,14 @@ const styles = theme => ({
     flex: 1
   },
   storeName: {
-    color: "black",
+    color: "#F4F4F4",
     marginTop: "16px",
     display: "inline-block"
   },
   menuButton: {
     marginRight: "30px",
     textDecoration: "none",
-    color: "black"
+    color: "#F4F4F4"
   },
   appbar: {
     padding: "0 60px",
