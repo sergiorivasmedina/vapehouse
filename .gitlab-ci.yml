@@ -7,7 +7,7 @@ admin-deploy:
    - master
   script:
     - cd /home/sergio_rivas/vapehouse/admin
-    - npm run build
+    - sudo npm run build
     - sudo rm -r /var/www/html/admin-build/*
     - sudo cp -r build/* /var/www/html/admin-build
     - echo "Despliegue Admin completo!"
@@ -18,7 +18,7 @@ shop-deploy:
     - master
   script:
     - cd /home/sergio_rivas/vapehouse/shop
-    - yarn build
+    - sudo yarn build
     - sudo rm -r /var/www/html/shop-build/*
     - sudo cp -r build/* /var/www/html/shop-build
     - echo "Despliegue Shop completo!"
