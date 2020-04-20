@@ -2,16 +2,16 @@ stages:
   - deploy-admin
   - deploy-shop
 
-# admin-deploy:
-#   stage: deploy-admin
-#   only:
-#    - master
-#   script:
-#     - cd admin
-#     - npm run build
-#     - rm -r /var/www/html/admin-build/*
-#     - cp -r build/* /var/www/html/admin-build
-#     - echo "Despliegue Admin completo !"
+admin-deploy:
+  stage: deploy-admin
+  only:
+   - master
+  script:
+    - cd admin
+    - npm run build
+    - rm -r /var/www/html/admin-build/*
+    - cp -r build/* /var/www/html/admin-build
+    - echo "Despliegue Admin completo !"
 
 shop-deploy:
   stage: deploy-shop
@@ -22,4 +22,4 @@ shop-deploy:
     - npm run build
     - rm -r /var/www/html/shop-build/*
     - cp -r build/* /var/www/html/shop-build
-    - echo "Despliegue Shop completo!"
+    - echo "Despliegue Shop completo !"
