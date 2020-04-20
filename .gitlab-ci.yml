@@ -10,7 +10,7 @@ admin-deploy:
     - npm run build
     - rm -r /var/www/html/admin-build/*
     - cp -r build/* /var/www/html/admin-build
-    - echo "Despliegue Admin completo!"
+    - echo "Despliegue Admin completo !"
 
 # shop-deploy:
 #   stage: deploy
