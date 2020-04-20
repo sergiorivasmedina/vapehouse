@@ -13,13 +13,13 @@ admin-deploy:
     - cp -r build/* /var/www/html/admin-build
     - echo "Despliegue Admin completo !"
 
-shop-deploy:
-  stage: deploy-shop
-  only:
-    - master
-  script:
-    - cd shop
-    - yarn build
-    - rm -r /var/www/html/shop-build/*
-    - cp -r build/* /var/www/html/shop-build
-    - echo "Despliegue Shop completo !"
+# shop-deploy:
+#   stage: deploy-shop
+#   only:
+#     - master
+#   script:
+#     - cd shop
+#     - yarn build
+#     - rm -r /var/www/html/shop-build/*
+#     - cp -r build/* /var/www/html/shop-build
+#     - echo "Despliegue Shop completo !"
