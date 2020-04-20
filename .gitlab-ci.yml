@@ -19,7 +19,7 @@ shop-deploy:
     - master
   script:
     - cd shop
-    - yarn run build
+    - npm run build
     - rm -r /var/www/html/shop-build/*
     - cp -r build/* /var/www/html/shop-build
-    - echo "Despliegue Shop completo !"
+    - echo "Despliegue Shop completo!"
