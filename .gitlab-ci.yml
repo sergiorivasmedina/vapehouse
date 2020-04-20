@@ -8,8 +8,8 @@ admin-deploy:
   script:
     - cd admin
     - npm run build
-    - rm -r /var/www/html/admin-build/*
-    - cp -r build/* /var/www/html/admin-build
+    - sudo rm -r /var/www/html/admin-build/*
+    - sudo cp -r build/* /var/www/html/admin-build
     - echo "Despliegue Admin completo!"
 
 # shop-deploy:
