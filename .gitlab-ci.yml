@@ -6,12 +6,11 @@ admin-deploy:
   only:
    - master
   script:
-    - pwd
-#     - cd /home/sergio_rivas/vapehouse/admin
-#     - sudo npm run build
-#     - sudo rm -r /var/www/html/admin-build/*
-#     - sudo cp -r build/* /var/www/html/admin-build
-#     - echo "Despliegue Admin completo!"
+    - cd admin
+    - npm run build
+    - rm -r /var/www/html/admin-build/*
+    - cp -r build/* /var/www/html/admin-build
+    - echo "Despliegue Admin completo!"
 
 # shop-deploy:
 #   stage: deploy
