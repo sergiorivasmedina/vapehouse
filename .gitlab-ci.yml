@@ -3,6 +3,8 @@ stages:
 
 admin-deploy:
   stage: deploy
+  only:
+   - master
   script:
     - cd /home/sergio_rivas/vapehouse/admin
     - npm run build
@@ -11,6 +13,8 @@ admin-deploy:
 
 shop-deploy:
   stage: deploy
+  only:
+    - master
   script:
     - cd /home/sergio_rivas/vapehouse/shop
     - yarn build
