@@ -1,8 +1,9 @@
 stages:
-  - deploy
+  - deploy-admin
+  - deploy-shop
 
 admin-deploy:
-  stage: deploy
+  stage: deploy-admin
   only:
    - master
   script:
@@ -13,7 +14,7 @@ admin-deploy:
     - echo "Despliegue Admin completo !"
 
 shop-deploy:
-  stage: deploy
+  stage: deploy-shop
   only:
     - master
   script:
