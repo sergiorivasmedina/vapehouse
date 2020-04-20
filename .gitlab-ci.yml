@@ -10,6 +10,7 @@ admin-deploy:
     - npm run build
     - sudo rm -r /var/www/html/admin-build/*
     - sudo cp -r build/* /var/www/html/admin-build
+    - echo "Despliegue Admin completo!"
 
 shop-deploy:
   stage: deploy
@@ -20,3 +21,4 @@ shop-deploy:
     - yarn build
     - sudo rm -r /var/www/html/shop-build/*
     - sudo cp -r build/* /var/www/html/shop-build
+    - echo "Despliegue Shop completo!"
