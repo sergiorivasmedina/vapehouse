@@ -20,7 +20,7 @@ const styles = theme => ({
   },
 });
 
-function BannerHamburger({ classes, productLink, aboutLink, number }) {
+function BannerHamburger({ classes, productLink, companyLink, contactLink, number }) {
   const [menu, toggleMenu] = useState(false);
 
   return (
@@ -57,9 +57,17 @@ function BannerHamburger({ classes, productLink, aboutLink, number }) {
           <ListItem>
             <span
               onClick={() => toggleMenu(false)} 
+              // style={{ display: "flex", width: "100%" }}
+            >
+              {companyLink}
+            </span>
+          </ListItem>
+          <ListItem>
+            <span
+              onClick={() => toggleMenu(false)} 
               style={{ display: "flex", width: "100%" }}
             >
-              {aboutLink}
+              {contactLink}
             </span>
           </ListItem>
           <ListItem>

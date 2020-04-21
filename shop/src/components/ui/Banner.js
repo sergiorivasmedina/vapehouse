@@ -26,6 +26,11 @@ const styles = theme => ({
     textDecoration: "none",
     color: "#F4F4F4"
   },
+  rightMenuButton: {
+    marginRight: "30px",
+    textDecoration: "none",
+    color: "#1C1C1C"
+  },
   appbar: {
     padding: "0 60px",
     [theme.breakpoints.down('md')]: {
@@ -38,21 +43,40 @@ const Banner = ({ classes, quantity, config, width }) => {
 
   const number = quantity ? ` (${quantity})` : "";
 
+  // For Top Banner
   const productLink = <Link to={`/product`} className={classes.menuButton}>
     <Typography variant="button" gutterBottom>Productos</Typography>
   </Link>
 
-  const aboutLink = <Link to={`/nosotros`} style={{flex: 1}} className={classes.menuButton}>
-    <Typography variant="button" gutterBottom>Nosotros</Typography>
+  const companyLink = <Link to={`/empresa`} className={classes.menuButton}>
+    <Typography variant="button" gutterBottom>Empresa</Typography>
+  </Link>
+
+  const contactLink = <Link to={`/contacto`} style={{flex: 1}} className={classes.menuButton}>
+    <Typography variant="button" gutterBottom>Contacto</Typography>
+  </Link>
+
+  //For Rigth Banner
+  const rightProductLink = <Link to={`/product`} className={classes.rightMenuButton}>
+    <Typography variant="button" gutterBottom>Productos</Typography>
+  </Link>
+
+  const rightCompanyLink = <Link to={`/empresa`} className={classes.rightMenuButton}>
+    <Typography variant="button" gutterBottom>Empresa</Typography>
+  </Link>
+
+  const rightContactLink = <Link to={`/contacto`} style={{flex: 1}} className={classes.rightMenuButton}>
+    <Typography variant="button" gutterBottom>Contacto</Typography>
   </Link>
 
   let menu;
   if (isWidthDown('sm', width)) {
-    menu = <BannerHamburger productLink={productLink} aboutLink={aboutLink} number={number} />
+    menu = <BannerHamburger productLink={rightProductLink} companyLink={rightCompanyLink} contactLink={rightContactLink} number={number} />
   } else {
     menu = (<span className={classes.buttons}>
         { productLink }
-        { aboutLink }
+        { companyLink }
+        { contactLink }
         <Link to={`/cart`} className={classes.menuButton} style={{ marginRight: 0 }}>
           <Typography variant="button" gutterBottom>Cart{number}</Typography>
         </Link>
