@@ -1,6 +1,19 @@
 export default {
   items: [
     {
+      name: 'Gestión',
+      url: '/gestion',
+      icon: 'icon-settings',
+      children: [
+        {
+          name: 'Productos',
+          url: '/gestion/productos',
+          icon: 'icon-basket-loaded',
+        },
+      ],
+    },
+    // Ejemplos de Template
+    {
       name: 'Dashboard',
       url: '/dashboard',
       icon: 'icon-speedometer',
