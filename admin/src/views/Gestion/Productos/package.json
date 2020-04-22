@@ -1,6 +1,6 @@
 {
-  "name": "LineaProducto",
+  "name": "Productos",
   "version": "0.0.0",
   "private": true,
-  "main": "./LineaProducto.js"
+  "main": "./Productos.js"
 }

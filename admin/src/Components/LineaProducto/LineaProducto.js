@@ -8,8 +8,11 @@ class LineaProducto extends Component {
         this.state = {
             primary: false,
             primary2: false,
-            productoModal: false
+            productoModal: false,
+            idProducto: null
         };
+
+        this.setState.idProducto = this.props.idProducto;
 
         this.togglePrimary = this.togglePrimary.bind(this);
         this.togglePrimary2 = this.togglePrimary2.bind(this);
@@ -32,6 +35,14 @@ class LineaProducto extends Component {
         this.setState({
           productoModal: !this.state.productoModal,
         });
+      }
+
+      componentDidMount(){
+          this.setState.idProducto = this.props.idProducto;
+      }
+
+      guardar() {
+        console.log(this.state.idProducto);
       }
 
     render() {
@@ -93,7 +104,7 @@ class LineaProducto extends Component {
                         <FormGroup row>
                         <Col sm="3">
                             <Label htmlFor="norden">N° Orden</Label>
-                            <Input type="text" id="nOrden" placeholder="N° Orden" />
+                            <Input type="text" id="nuevoNOrden" placeholder="N° Orden" />
                         </Col>
                         <Col sm="4">
                             <Label htmlFor="precio">Precio</Label>
@@ -114,7 +125,7 @@ class LineaProducto extends Component {
                         </FormGroup>
                     </ModalBody>
                     <ModalFooter>
-                        <Button color="primary" onClick={this.toggleProducto}>Guardar</Button>{' '}
+                        <Button color="primary" onClick={this.guardar.bind(this)}>Guardar</Button>{' '}
                         <Button color="secondary" onClick={this.toggleProducto}>Cancel</Button>
                     </ModalFooter>
                     </Modal>
