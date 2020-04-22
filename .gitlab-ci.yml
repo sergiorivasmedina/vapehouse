@@ -1,6 +1,17 @@
 stages:
+  - deploy-backend
   - deploy-admin
   - deploy-shop
+
+deploy-backend:
+  stage: deploy-backend
+  only:
+    - master
+  script:
+    - cd backend
+    - CI=false mvn clean package
+    - cd target
+    - java -jar backend-0.0.1-SNAPSHOT.jar
 
 admin-deploy:
   stage: deploy-admin

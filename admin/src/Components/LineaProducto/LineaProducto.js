@@ -9,14 +9,39 @@ class LineaProducto extends Component {
             primary: false,
             primary2: false,
             productoModal: false,
-            idProducto: null
-        };
+            idProducto: null,
+            valueEditarProductoNombre: this.props.nombre,
+            valueEditarProductoNOrden: this.props.norden,
+            valueEditarProductoPrecio: this.props.precio,
+            valueEditarProductoDescripcion: this.props.descripcion,
 
-        this.setState.idProducto = this.props.idProducto;
+            productChange: false
+        };
 
         this.togglePrimary = this.togglePrimary.bind(this);
         this.togglePrimary2 = this.togglePrimary2.bind(this);
         this.toggleProducto = this.toggleProducto.bind(this);
+
+        this.handleChangeEditarProductoNombre = this.handleChangeEditarProductoNombre.bind(this);
+        this.handleChangeEditarProductoNOrden = this.handleChangeEditarProductoNOrden.bind(this);
+        this.handleChangeEditarProductoPrecio = this.handleChangeEditarProductoPrecio.bind(this);
+        this.handleChangeEditarProductoDescripcion = this.handleChangeEditarProductoDescripcion.bind(this);
+    }
+
+    handleChangeEditarProductoNombre(event) {
+        this.setState({valueEditarProductoNombre:event.target.value});
+    }
+
+    handleChangeEditarProductoNOrden(event) {
+        this.setState({valueEditarProductoNOrden:event.target.value});
+    }
+
+    handleChangeEditarProductoPrecio(event) {
+        this.setState({valueEditarProductoPrecio:event.target.value});
+    }
+
+    handleChangeEditarProductoDescripcion(event) {
+        this.setState({valueEditarProductoDescripcion:event.target.value});
     }
 
     togglePrimary() {
@@ -38,14 +63,25 @@ class LineaProducto extends Component {
       }
 
       componentDidMount(){
-          this.setState.idProducto = this.props.idProducto;
+      }
+
+      abrirProductoConfig() {
+        console.log(this.props.idProducto);
+
+        this.toggleProducto();
       }
 
       guardar() {
-        console.log(this.state.idProducto);
+        if(document.getElementById('nuevoNombre').value != this.props.nombre || document.getElementById('nuevoNOrden').value != this.props.norden || document.getElementById('nuevoPrecio').value != this.props.precio || this.props.nombre && document.getElementById('nuevaDescripcion').value != this.props.descripcion){
+            //llamar al web service correspondiente para la actualizacion del producto
+        }
+        
+        
+        this.toggleProducto();
       }
 
     render() {
+        
         return(
             <tr>
                 <td>{this.props.norden}</td>
@@ -94,7 +130,7 @@ class LineaProducto extends Component {
                     </Modal>
                 </td>
                 <td>
-                    <Button color="danger" className="btn-pill" onClick={this.toggleProducto}>
+                    <Button color="danger" className="btn-pill" onClick={this.abrirProductoConfig.bind(this)}>
                     <i className="fa fa-edit"></i>&nbsp;Editar Producto
                     </Button>
                     <Modal isOpen={this.state.productoModal} toggle={this.toggleProducto}
@@ -104,23 +140,23 @@ class LineaProducto extends Component {
                         <FormGroup row>
                         <Col sm="3">
                             <Label htmlFor="norden">N° Orden</Label>
-                            <Input type="text" id="nuevoNOrden" placeholder="N° Orden" />
+                            <Input type="text" id="nuevoNOrden" placeholder="N° Orden" value={this.state.valueEditarProductoNOrden} onChange={this.handleChangeEditarProductoNOrden}/>
                         </Col>
                         <Col sm="4">
                             <Label htmlFor="precio">Precio</Label>
-                            <Input type="text" id="nuevoPrecio" placeholder="Nuevo precio" />
+                            <Input type="text" id="nuevoPrecio" placeholder="Nuevo precio" value={this.state.valueEditarProductoPrecio} onChange={this.handleChangeEditarProductoPrecio}/>
                         </Col>
                         </FormGroup>
                         <FormGroup>
                         <Col sm="10">
                             <Label htmlFor="nombre">Nombre</Label>
-                            <Input type="text" id="nuevoNombre" placeholder="Ingrese nuevo nombre"  />
+                            <Input type="text" id="nuevoNombre" placeholder="Ingrese nuevo nombre" value={this.state.valueEditarProductoNombre} onChange={this.handleChangeEditarProductoNombre}/>
                         </Col>
                         </FormGroup>
                         <FormGroup>
                         <Col sm="12">
                             <Label htmlFor="descripcion">Descripción</Label>
-                            <Input type="text" id="nuevaDescripcion" placeholder="Ingrese nueva descripción" />
+                            <Input type="text" id="nuevaDescripcion" placeholder="Ingrese nueva descripción" value={this.state.valueEditarProductoDescripcion} onChange={this.handleChangeEditarProductoDescripcion}/>
                         </Col>
                         </FormGroup>
                     </ModalBody>

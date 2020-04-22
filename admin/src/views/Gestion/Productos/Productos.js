@@ -53,7 +53,7 @@ class Producto extends Component {
 
                   <tbody>
                     {this.state.productos.map(producto =>
-                      <LineaProducto id={producto.idProducto} norden={producto.norden} nombre={producto.nombre} precio={producto.precio} descripcion={producto.descripcion} fechaRegistro={producto.fechaRegistro}/>
+                      <LineaProducto idProducto={producto.idProducto} norden={producto.norden} nombre={producto.nombre} precio={producto.precio} descripcion={producto.descripcion} fechaRegistro={producto.fechaRegistro}/>
                     )}
                   </tbody>
                 </Table>
