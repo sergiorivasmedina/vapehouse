@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
-import { Badge, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
+import { Button, Card, CardBody, CardHeader, Col, Pagination, PaginationItem, PaginationLink, Row, Table } from 'reactstrap';
+import axios from '../../../index';
 
 class Tables extends Component {
-
-    componentDidMount(){
-        //aqui traer la informacion del back-end
-        console.log("probando componentDidMount");
+  
+  constructor(props){
+    super(props);
+    this.state = {
+      productos: []
     }
+  }
+
+  componentDidMount(){
+    //aqui traer la informacion del back-end
+    console.log("probando componentDidMount");
+    axios.get('/productos').then(res => {
+      this.setState({ productos:res.data })
+    })
+
+    
+  }
     
     render() {
         return (
@@ -15,7 +28,7 @@ class Tables extends Component {
           <Col xs="12" lg="12">
             <Card>
               <CardHeader>
-                <i className="fa fa-align-justify"></i> Productos Online
+                <i className="fa fa-align-justify"></i> Productos en Tienda Online
               </CardHeader>
               <CardBody>
                 <Table responsive>
@@ -24,52 +37,39 @@ class Tables extends Component {
                     <th>N° Orden</th>
                     <th>Nombre</th>
                     <th>Precio</th>
+                    <th>Descripción</th>
                     <th>Fecha Registro</th>
-                    <th>URL-Foto</th>
+                    <th>Fotos</th>
+                    <th>Detalles</th>
+                    <th></th>
                   </tr>
                   </thead>
 
                   <tbody>
-                  <tr>
-                    <td>Samppa Nori</td>
-                    <td>2012/01/01</td>
-                    <td>Member</td>
-                    <td>
-                      <Badge color="success">Active</Badge>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Estavan Lykos</td>
-                    <td>2012/02/01</td>
-                    <td>Staff</td>
-                    <td>
-                      <Badge color="danger">Banned</Badge>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Chetan Mohamed</td>
-                    <td>2012/02/01</td>
-                    <td>Admin</td>
-                    <td>
-                      <Badge color="secondary">Inactive</Badge>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Derick Maximinus</td>
-                    <td>2012/03/01</td>
-                    <td>Member</td>
-                    <td>
-                      <Badge color="warning">Pending</Badge>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Friderik Dávid</td>
-                    <td>2012/01/21</td>
-                    <td>Staff</td>
-                    <td>
-                      <Badge color="success">Active</Badge>
-                    </td>
-                  </tr>
+                    {this.state.productos.map(producto => 
+                      <tr>
+                        <td>{producto.norden}</td>
+                        <td>{producto.nombre}</td>
+                        <td>{producto.precio}</td>
+                        <td>{producto.descripcion}</td>
+                        <td>{producto.fechaRegistro}</td>
+                        <td>
+                          <Button color="light" className="btn-pill">
+                            <i className="fa fa-instagram"></i>&nbsp;Ver/Editar
+                          </Button>
+                        </td>
+                        <td>
+                          <Button color="light" className="btn-pill">
+                            <i className="fa fa-list-ul"></i>&nbsp;Ver/Editar
+                          </Button>
+                        </td>
+                        <td>
+                          <Button color="danger" className="btn-pill">
+                            <i className="fa fa-edit"></i>&nbsp;Editar Producto
+                          </Button>
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </Table>
                 <Pagination>
