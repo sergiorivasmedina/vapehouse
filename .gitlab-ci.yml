@@ -8,6 +8,7 @@ admin-deploy:
    - master
   script:
     - cd admin
+    - npm install
     - npm run build
     - rm -r /var/www/html/admin-build/*
     - cp -r build/* /var/www/html/admin-build
