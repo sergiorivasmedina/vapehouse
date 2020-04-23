@@ -74,6 +74,17 @@ class LineaProducto extends Component {
       guardar() {
         if(document.getElementById('nuevoNombre').value != this.props.nombre || document.getElementById('nuevoNOrden').value != this.props.norden || document.getElementById('nuevoPrecio').value != this.props.precio || this.props.nombre && document.getElementById('nuevaDescripcion').value != this.props.descripcion){
             //llamar al web service correspondiente para la actualizacion del producto
+            var producto = {
+                idProducto: this.props.idProducto,
+                nombre: document.getElementById('nuevoNombre').value,
+                precio: document.getElementById('nuevoPrecio').value,
+                norden: document.getElementById('nuevoNOrden').value,
+                descripcion: document.getElementById('nuevaDescripcion').value
+            }
+
+            axios.post('/productos', producto).then(res =>{
+                console.log("Se realizo el cambio del producto");
+            })
         }
         
         

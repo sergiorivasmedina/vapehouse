@@ -9,6 +9,9 @@ import com.vapehouse.services.ProductoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 
 @RestController
@@ -21,5 +24,11 @@ public class ProductoController {
     public List<Producto> listarproductos() {
         return productoService.listarProductos();
     }
+
+    @PostMapping(value="/producto/editar")
+    public Producto editarProducto(@RequestBody Producto producto) {
+        return productoService.editarProducto(producto);
+    }
+    
     
 }
