@@ -1,0 +1,36 @@
+{
+  "name": "country-language",
+  "version": "0.1.7",
+  "description": "Query languages spoken to a country or countries where people speak a language.",
+  "main": "index.js",
+  "dependencies": {
+    "underscore": "~1.7.0",
+    "underscore.deep": "~0.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "make test"
+  },
+  "keywords": [
+    "country",
+    "language",
+    "native",
+    "node"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bdswiss/country-language.git"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "author": {
+    "name": "Tassos Diamantidis",
+    "email": "tassos@inruntime.com"
+  },
+  "bugs": {
+    "url": "https://github.com/bdswiss/country-language/issues",
+    "email": "opensource@bdswiss.com"
+  },
+  "license": "MIT"
+}
