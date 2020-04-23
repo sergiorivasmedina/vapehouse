@@ -1,8 +1,13 @@
 # Secrets
 vapekey
 vapekey.pub
+
+## Backend Aplication Properties
+backend/src/main/resources/application.properties
+
 # APP SHOP:
 *.env
+admin/src/index.js
 
 # dependencies
 shop/node_modules

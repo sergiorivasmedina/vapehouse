@@ -82,7 +82,7 @@ class LineaProducto extends Component {
                 descripcion: document.getElementById('nuevaDescripcion').value
             }
 
-            axios.post('/productos', producto).then(res =>{
+            axios.post('/producto/editar', producto).then(res =>{
                 console.log("Se realizo el cambio del producto");
             })
         }

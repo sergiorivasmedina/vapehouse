@@ -27,6 +27,7 @@ public class ProductoController {
 
     @PostMapping(value="/producto/editar")
     public Producto editarProducto(@RequestBody Producto producto) {
+        System.out.println("hola, entré");
         return productoService.editarProducto(producto);
     }
     
