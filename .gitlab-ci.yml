@@ -12,7 +12,6 @@ deploy-backend:
     - CI=false mvn clean package
     - cd target
     - java -jar backend-0.0.1-SNAPSHOT.jar &
-    - echo "Despliegue backend completo !!"
 
 admin-deploy:
   stage: deploy-admin
