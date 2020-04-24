@@ -30,6 +30,12 @@ public class ProductoController {
         System.out.println("hola, entré");
         return productoService.editarProducto(producto);
     }
+
+    @PostMapping(value="/producto/insertar")
+    public Producto insertarProducto(@RequestBody Producto producto) {
+        return productoService.insertarProducto(producto);
+    }
+    
     
     
 }

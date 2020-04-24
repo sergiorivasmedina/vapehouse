@@ -15,10 +15,14 @@ public class ProductoService {
     private ProductoRepository productoRepository;
 
     public List<Producto> listarProductos() {
-        return productoRepository.findAll();
+        return productoRepository.getAllProductsByNumberOrder();
     }
 
     public Producto editarProducto(Producto producto){
+        return productoRepository.save(producto);
+    }
+
+    public Producto insertarProducto(Producto producto){
         return productoRepository.save(producto);
     }
 }
