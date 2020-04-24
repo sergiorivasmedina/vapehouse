@@ -13,4 +13,7 @@ public interface ProductoRepository extends JpaRepository<Producto, Integer> {
 
     @Query(value = "SELECT * FROM vapehousebd.producto order by n_orden;", nativeQuery = true)
     List<Producto> getAllProductsByNumberOrder();
+
+    @Query(value = "delete from producto where id_producto = ?1", nativeQuery = true)
+    void remove(Integer idProducto);
 }

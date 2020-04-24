@@ -25,4 +25,12 @@ public class ProductoService {
     public Producto insertarProducto(Producto producto){
         return productoRepository.save(producto);
     }
+
+    public Producto actualizarProducto(Producto producto){
+        return productoRepository.save(producto);
+    }
+
+    public void eliminarProducto(Integer idProducto) {
+        productoRepository.remove(idProducto);
+    }
 }

@@ -8,9 +8,11 @@ import com.vapehouse.entities.Producto;
 import com.vapehouse.services.ProductoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -27,7 +29,6 @@ public class ProductoController {
 
     @PostMapping(value="/producto/editar")
     public Producto editarProducto(@RequestBody Producto producto) {
-        System.out.println("hola, entré");
         return productoService.editarProducto(producto);
     }
 
@@ -36,6 +37,9 @@ public class ProductoController {
         return productoService.insertarProducto(producto);
     }
     
-    
+    @DeleteMapping(value="/producto/eliminar")
+    public void eliminarProducto(@RequestParam Integer idProducto) {
+        productoService.eliminarProducto(idProducto);
+    }
     
 }

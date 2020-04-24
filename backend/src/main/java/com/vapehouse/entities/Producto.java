@@ -40,11 +40,15 @@ public class Producto {
     @Column(name = "usuarioModificacion")
     private Integer usuarioModificacion;
 
+    @Column(name = "estado")
+    private Integer estado;
+
 
     public Producto() {
     }
 
-    public Producto(Integer idProducto, Integer nOrden, String nombre, Double precio, String descripcion, String fechaRegistro, Usuario usuarioCreacion, Integer usuarioModificacion) {        this.idProducto = idProducto;
+    public Producto(Integer idProducto, Integer nOrden, String nombre, Double precio, String descripcion, String fechaRegistro, Usuario usuarioCreacion, Integer usuarioModificacion, Integer estado) {
+        this.idProducto = idProducto;
         this.nOrden = nOrden;
         this.nombre = nombre;
         this.precio = precio;
@@ -52,6 +56,7 @@ public class Producto {
         this.fechaRegistro = fechaRegistro;
         this.usuarioCreacion = usuarioCreacion;
         this.usuarioModificacion = usuarioModificacion;
+        this.estado = estado;
     }
 
     public Integer getIdProducto() {
@@ -116,6 +121,14 @@ public class Producto {
 
     public void setUsuarioModificacion(Integer usuarioModificacion) {
         this.usuarioModificacion = usuarioModificacion;
+    }
+
+    public Integer getEstado() {
+        return this.estado;
+    }
+
+    public void setEstado(Integer estado) {
+        this.estado = estado;
     }
 
     @Override
