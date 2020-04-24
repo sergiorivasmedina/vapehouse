@@ -110,6 +110,10 @@ class Producto extends Component {
     render() {
         return (
       <div className="animated fadeIn">
+        <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
+          <td><Button block color="dark" className="btn-square">Agregar Producto</Button></td>
+          <br></br>
+        </Col>
         <Row>
           <Col xs="12" lg="12">
             <Card>
