@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardHeader, Col, Row, Table, Input,Button } from 'reactstrap';
+import { Card, CardBody, CardHeader, Col, Row, Table, Input,Button,ButtonDropdown,DropdownItem,DropdownToggle,DropdownMenu,Badge } from 'reactstrap';
 import LineaProducto from '../../../Components/LineaProducto/LineaProducto'
 import axios from '../../../index';
 
@@ -18,7 +18,9 @@ class Producto extends Component {
       valueEditarProductoDescripcion: '',
       idProducto: -1,
 
-      productChange: false
+      productChange: false,
+
+      dropdownOpen: new Array(19).fill(false),
       
     };
 
@@ -38,6 +40,13 @@ class Producto extends Component {
       this.setState({ productos:res.data })
     })
 
+  }
+
+  toggle(i) {
+    const newArray = this.state.dropdownOpen.map((element, index) => { return (index === i ? !element : false); });
+    this.setState({
+      dropdownOpen: newArray,
+    });
   }
 
   handleChangeEditarProductoNombre(event) {
@@ -88,7 +97,8 @@ class Producto extends Component {
             precio: document.getElementById('nuevoPrecio').value,
             norden: document.getElementById('nuevoNOrden').value,
             descripcion: document.getElementById('nuevaDescripcion').value,
-            fechaRegistro: producto.fechaRegistro
+            fechaRegistro: producto.fechaRegistro,
+            estado: producto.estado
         }
 
         axios.post('/producto/editar', prod).then(res =>{
@@ -110,6 +120,28 @@ class Producto extends Component {
     console.log("Agregar producto");
   }
 
+  activacionProducto(producto, i) {
+    //cambiar estado del producto
+    var prod = {
+      idProducto: producto.idProducto,
+      nombre: producto.nombre,
+      precio: producto.precio,
+      norden: producto.norden,
+      descripcion: producto.descripcion,
+      fechaRegistro: producto.fechaRegistro,
+      estado: i
+    }
+
+    axios.post('/producto/editar', prod).then(res =>{
+      console.log("Se realizo el cambio del producto");
+      //actualizar la tabla
+      var index_actualizar = this.state.productos.findIndex(x=> x.idProducto === producto.idProducto);
+      let prodArray = this.state.productos.slice();
+      prodArray[index_actualizar].estado = prod.estado;
+      this.setState({productos: prodArray});
+      this.setState({idProducto: -1});
+  })
+  }
     
     render() {
         return (
@@ -135,6 +167,7 @@ class Producto extends Component {
                     <th>Fecha Registro</th>
                     <th>Fotos</th>
                     <th>Detalles</th>
+                    <th>Estado</th>
                     <th></th>
                   </tr>
                   </thead>
@@ -146,6 +179,14 @@ class Producto extends Component {
                       {(this.state.idProducto !== producto.idProducto) ? (
                         <React.Fragment>
                           <LineaProducto idProducto={producto.idProducto} norden={producto.norden} nombre={producto.nombre} precio={producto.precio} descripcion={producto.descripcion} fechaRegistro={producto.fechaRegistro}/>
+                          <td>
+                          {(producto.estado === 1) ? (
+                            <Badge color="success">Activo</Badge>
+                          ) :(
+                            <Badge color="secondary">Inactivo</Badge>
+                          )
+                          }
+                          </td>
                           <td>
                               <Button color="danger" className="btn-pill" onClick={this.abrirProductoConfig.bind(this, producto)}>
                               <i className="fa fa-edit"></i>&nbsp;Editar Producto
@@ -161,13 +202,29 @@ class Producto extends Component {
                           <td> &nbsp;&nbsp;&nbsp;&nbsp;</td>
                           <td> &nbsp;&nbsp;&nbsp;&nbsp;</td>
                           <td>
-                            <Button color="secondary" outline className="btn-pill" onClick={this.cancelarProductoConfig.bind(this, producto)}>
-                              <i className="fa fa-times-rectangle-o"></i>&nbsp;Cancelar
-                            </Button>
+                          <ButtonDropdown isOpen={this.state.dropdownOpen[18]} toggle={() => { this.toggle(18); }}>
+                            <DropdownToggle caret size="sm" outline>
+                              <i className="fa fa-cog"></i>
+                            </DropdownToggle>
+                            <DropdownMenu>
+                              <DropdownItem header>Configuración</DropdownItem>
+                              {(producto.estado !== 1) ? (
+                                <DropdownItem onClick={this.activacionProducto.bind(this, producto, 1)}>Activar</DropdownItem>
+                              ): (
+                                <DropdownItem onClick={this.activacionProducto.bind(this, producto, 0)}>Desactivar</DropdownItem>
+                              )}
+                              <DropdownItem>Eliminar</DropdownItem>
+                            </DropdownMenu>
+                          </ButtonDropdown>
                           </td>
                           <td>
                             <Button color="danger" outline className="btn-pill" onClick={this.guardar.bind(this, producto)}>
                               <i className="fa fa-save"></i>&nbsp;Guardar
+                            </Button>
+                          </td>
+                          <td>
+                            <Button color="secondary" outline className="btn-pill" onClick={this.cancelarProductoConfig.bind(this, producto)}>
+                              <i className="fa fa-times-rectangle-o"></i>&nbsp;Cancelar
                             </Button>
                           </td>
                         </React.Fragment>
