@@ -10,8 +10,10 @@ deploy-backend:
   script:
     - cd backend
     - CI=false mvn clean package
-    - cd target
-    - CI=false java -jar backend-0.0.1-SNAPSHOT.jar > /dev/null &
+    # - cd target
+    # - CI=false java -jar backend-0.0.1-SNAPSHOT.jar > /dev/null &
+    - chmod +x deploy-backend.sh
+    - CI=false ./deploy-backend.sh
 
 admin-deploy:
   stage: deploy-admin
