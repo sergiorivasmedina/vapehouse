@@ -5,12 +5,12 @@ stages:
 
 deploy-backend:
   image: maven:3-jdk-8
-  stage: build
+  stage: deploy-backend
   script: "mvn package -B"
   artifacts:
     paths:
       - target/*.jar
-      
+
 # deploy-backend:
 #   stage: deploy-backend
 #   only:
