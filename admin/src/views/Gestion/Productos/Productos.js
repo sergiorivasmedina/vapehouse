@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardBody, CardHeader, Col, Row, Table, Input,Button,ButtonDropdown,DropdownItem,DropdownToggle,DropdownMenu,Badge } from 'reactstrap';
+import { Label,Card, CardBody, CardHeader, Col, Row, Table, Input,Button,ButtonDropdown,DropdownItem,DropdownToggle,DropdownMenu,Badge,Modal,ModalHeader,ModalBody,ModalFooter,FormGroup } from 'reactstrap';
 import LineaProducto from '../../../Components/LineaProducto/LineaProducto'
 import axios from '../../../index';
 
@@ -21,6 +21,13 @@ class Producto extends Component {
       productChange: false,
 
       dropdownOpen: new Array(19).fill(false),
+
+      small: false,
+
+      valueNuevoProductoNombre: '',
+      valueNuevoProductoNOrden: '',
+      valueNuevoProductoPrecio: '',
+      valueNuevoProductoDescripcion: ''
       
     };
 
@@ -31,6 +38,12 @@ class Producto extends Component {
     this.handleChangeEditarProductoNOrden = this.handleChangeEditarProductoNOrden.bind(this);
     this.handleChangeEditarProductoPrecio = this.handleChangeEditarProductoPrecio.bind(this);
     this.handleChangeEditarProductoDescripcion = this.handleChangeEditarProductoDescripcion.bind(this);
+    this.toggleSmall = this.toggleSmall.bind(this);
+
+    this.handleChangeNuevoProductoNOrden = this.handleChangeNuevoProductoNOrden.bind(this);
+    this.handleChangeNuevoProductoPrecio = this.handleChangeNuevoProductoPrecio.bind(this);
+    this.handleChangeNuevoProductoNombre = this.handleChangeNuevoProductoNombre.bind(this);
+    this.handleChangeNuevoProductoDescripcion = this.handleChangeNuevoProductoDescripcion.bind(this);
     
   }
 
@@ -65,7 +78,21 @@ class Producto extends Component {
       this.setState({valueEditarProductoDescripcion:event.target.value});
   }
 
-  
+  handleChangeNuevoProductoNOrden(event) {
+    this.setState({valueNuevoProductoNOrden:event.target.value});
+  }
+
+  handleChangeNuevoProductoPrecio(event) {
+    this.setState({valueNuevoProductoPrecio:event.target.value});
+  }
+
+  handleChangeNuevoProductoNombre(event) {
+    this.setState({valueNuevoProductoNombre:event.target.value});
+  }
+
+  handleChangeNuevoProductoDescripcion(event) {
+    this.setState({valueNuevoProductoDescripcion:event.target.value});
+  }
 
   toggleProducto() {
     this.setState({
@@ -116,8 +143,38 @@ class Producto extends Component {
     this.toggleProducto();
   }
 
+  toggleSmall() {
+    this.setState({
+      small: !this.state.small,
+    });
+  }
+
   agregarProducto() {
-    console.log("Agregar producto");
+    let nOrden = document.getElementById('nOrden').value;
+    let nombre = document.getElementById('nombre').value;
+    let precio = document.getElementById('precio').value;
+    let descripcion = document.getElementById('descripcion').value;
+    if(nOrden !== '' && nombre !== '' && precio !== '' && descripcion !== '' && !isNaN(nOrden) && !isNaN(precio)){
+      //llamar web service para agregar el nuevo producto
+      var prod = {
+        nombre: nombre,
+        precio: precio,
+        norden: nOrden,
+        descripcion: descripcion,
+        estado: 1
+      }
+
+      axios.post('/producto/insertar', prod).then(res => {
+        let prodArray = this.state.productos.slice();
+        prod.fechaRegistro = "Ahora"
+        prodArray.push(prod);
+        this.setState({productos: prodArray});
+      })
+
+      this.toggleSmall();
+    } else {
+      console.log("no cumplio el condicional")
+    }
   }
 
   activacionProducto(producto, i) {
@@ -133,7 +190,6 @@ class Producto extends Component {
     }
 
     axios.post('/producto/editar', prod).then(res =>{
-      console.log("Se realizo el cambio del producto");
       //actualizar la tabla
       var index_actualizar = this.state.productos.findIndex(x=> x.idProducto === producto.idProducto);
       let prodArray = this.state.productos.slice();
@@ -142,12 +198,57 @@ class Producto extends Component {
       this.setState({idProducto: -1});
   })
   }
+
+  eliminarProducto(producto){
+    axios.delete('/producto/eliminar', {params: {idProducto: producto.idProducto}}).then(res => {
+      // var index_actualizar = this.state.productos.findIndex(x=> x.idProducto === producto.idProducto);
+      let prodArray = this.state.productos.filter( e => e.idProducto !== producto.idProducto);
+      this.setState({productos: prodArray});
+      this.setState({idProducto: -1});
+    })
+  }
     
     render() {
         return (
       <div className="animated fadeIn">
         <Col col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-          <td><Button block color="dark" className="btn-square" onClick={this.agregarProducto.bind(this)}>Agregar Producto</Button></td>
+          <td>
+            <Button block color="dark" className="btn-square" onClick={this.toggleSmall}>Agregar Producto</Button>
+            <Modal isOpen={this.state.small} toggle={this.toggleSmall} className={'modal-sm ' + this.props.className}>
+              <ModalHeader toggle={this.toggleSmall}>Agregar Nuevo Producto</ModalHeader>
+              <ModalBody>
+                <React.Fragment>
+                  <FormGroup row>
+                    <Col sm="4">
+                      <Label htmlFor="labelNOrden">N° Orden</Label>
+                      <Input type="text" id="nOrden" value={this.state.valueNuevoProductoNOrden} onChange={this.handleChangeNuevoProductoNOrden} placeholder="N°"/>
+                    </Col>
+                    <Col sm="1">&nbsp;</Col>
+                    <Col sm="5">
+                      <Label htmlFor="labelPrecio">Precio (S/)</Label>
+                      <Input type="text" id="precio" value={this.state.valueNuevoProductoPrecio} onChange={this.handleChangeNuevoProductoPrecio} placeholder="Precio (S/)"/>
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Col sm="10">
+                      <Label htmlFor="labelNombre">Nombre del Producto</Label>
+                      <Input type="text" id="nombre" value={this.state.valueNuevoProductoNombre} onChange={this.handleChangeNuevoProductoNombre} placeholder="Nombre"/>
+                    </Col>
+                  </FormGroup>
+                  <FormGroup row>
+                    <Col sm="12">
+                      <Label htmlFor="labelDescripcion">Descripción</Label>
+                      <Input type="text" id="descripcion" value={this.state.valueNuevoProductoDescripcion} onChange={this.handleChangeNuevoProductoDescripcion} placeholder="Descripcion"/>
+                    </Col>
+                  </FormGroup>
+                </React.Fragment>
+              </ModalBody>
+              <ModalFooter>
+                <Button color="primary" onClick={this.agregarProducto.bind(this)}>Agregar</Button>{' '}
+                <Button color="secondary" onClick={this.toggleSmall}>Cancel</Button>
+              </ModalFooter>
+            </Modal>
+          </td>
           <br></br>
         </Col>
         <Row>
@@ -195,7 +296,7 @@ class Producto extends Component {
                         </React.Fragment>
                       ):(
                         <React.Fragment>
-                          <td><Input type="text" id="nuevoNOrden" placeholder="N° Orden" value={this.state.valueEditarProductoNOrden} onChange={this.handleChangeEditarProductoNOrden}/></td>
+                          <td sm="8"><Input type="text" id="nuevoNOrden" placeholder="N° Orden" value={this.state.valueEditarProductoNOrden} onChange={this.handleChangeEditarProductoNOrden}/></td>
                           <td><Input type="text" id="nuevoNombre" placeholder="Ingrese nombre" value={this.state.valueEditarProductoNombre} onChange={this.handleChangeEditarProductoNombre}/></td>
                           <td><Input type="text" id="nuevoPrecio" placeholder="Ingrese precio" value={this.state.valueEditarProductoPrecio} onChange={this.handleChangeEditarProductoPrecio}/></td>
                           <td><Input type="text" id="nuevaDescripcion" placeholder="Ingrese descripcion" value={this.state.valueEditarProductoDescripcion} onChange={this.handleChangeEditarProductoDescripcion}/></td>
@@ -213,7 +314,7 @@ class Producto extends Component {
                               ): (
                                 <DropdownItem onClick={this.activacionProducto.bind(this, producto, 0)}>Desactivar</DropdownItem>
                               )}
-                              <DropdownItem>Eliminar</DropdownItem>
+                              <DropdownItem onClick={this.eliminarProducto.bind(this, producto)}>Eliminar</DropdownItem>
                             </DropdownMenu>
                           </ButtonDropdown>
                           </td>

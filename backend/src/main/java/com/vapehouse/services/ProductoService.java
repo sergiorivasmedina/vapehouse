@@ -1,5 +1,8 @@
 package com.vapehouse.services;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import com.vapehouse.entities.Producto;
@@ -23,6 +26,9 @@ public class ProductoService {
     }
 
     public Producto insertarProducto(Producto producto){
+        Date fechaActual = new Date();
+        DateFormat fechaFormat = new SimpleDateFormat("dd / MM / yyyy");
+        producto.setFechaRegistro(fechaFormat.format(fechaActual));
         return productoRepository.save(producto);
     }
 
