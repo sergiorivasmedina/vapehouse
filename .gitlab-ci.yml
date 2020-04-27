@@ -19,6 +19,7 @@ admin-deploy:
    - master
   script:
     - cd admin
+    - CI=false rm -r node_modules/
     - CI=false npm install
     - CI=false npm run build
     - rm -r /var/www/html/admin-build/*
