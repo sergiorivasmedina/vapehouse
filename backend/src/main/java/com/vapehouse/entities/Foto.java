@@ -64,7 +64,6 @@ public class Foto {
         return "{" +
             " idFoto='" + getIdFoto() + "'" +
             ", urlFoto='" + getUrlFoto() + "'" +
-            ", producto='" + getProducto() + "'" +
             "}";
     }
 

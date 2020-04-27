@@ -64,7 +64,6 @@ public class Detalle {
         return "{" +
             " idDetalle='" + getIdDetalle() + "'" +
             ", infoDetalle='" + getInfoDetalle() + "'" +
-            ", producto='" + getProducto() + "'" +
             "}";
     }
     

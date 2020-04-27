@@ -64,7 +64,6 @@ public class Variante {
         return "{" +
             " idVariante='" + getIdVariante() + "'" +
             ", etiqueta='" + getEtiqueta() + "'" +
-            ", producto='" + getProducto() + "'" +
             "}";
     }
 
