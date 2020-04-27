@@ -31,6 +31,7 @@ shop-deploy:
     - master
   script:
     - cd shop
+    - CI=false npm install
     - CI=false npm run build
     - rm -r /var/www/html/shop-build/*
     - cp -r build/* /var/www/html/shop-build
