@@ -91,7 +91,7 @@ function Product(props) {
 
     const item = {
       img: `../photos/${product.url}/${product.photos[0]}`,
-      url: `/product/${product.url}`,
+      url: '/product/'+product.idProducto,
       sku_id: sku_id,
       name: product.name,
       price: price,

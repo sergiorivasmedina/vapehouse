@@ -29,6 +29,11 @@ public class ProductoController {
         return productoService.listarProductos();
     }
 
+    @GetMapping(value="/productos/activos")
+    public List<Producto> listarproductosActivos() {
+        return productoService.listarProductosActivos();
+    }
+
     @PostMapping(value="/producto/editar")
     public Producto editarProducto(@RequestBody Producto producto) {
         return productoService.editarProducto(producto);
@@ -41,7 +46,6 @@ public class ProductoController {
     
     @RequestMapping(value = "/producto/eliminar", method = RequestMethod.DELETE)
     public void eliminarProducto(@RequestParam Integer idProducto) {
-        System.out.println("------idProd: "+idProducto);
         productoService.eliminarProducto(idProducto);
     }
     

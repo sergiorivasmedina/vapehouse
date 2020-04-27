@@ -23,16 +23,16 @@ public class Variante {
 
     @ManyToOne
     @JoinColumn(name = "idProducto")
-    private Producto Producto;
+    private Producto producto;
 
 
     public Variante() {
     }
 
-    public Variante(Integer idVariante, String etiqueta, Producto Producto) {
+    public Variante(Integer idVariante, String etiqueta, Producto producto) {
         this.idVariante = idVariante;
         this.etiqueta = etiqueta;
-        this.Producto = Producto;
+        this.producto = producto;
     }
 
     public Integer getIdVariante() {
@@ -51,12 +51,12 @@ public class Variante {
         this.etiqueta = etiqueta;
     }
 
-    public Producto getProducto() {
-        return this.Producto;
-    }
+    // public Producto getProducto() {
+    //     return this.producto;
+    // }
 
-    public void setProducto(Producto Producto) {
-        this.Producto = Producto;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class Variante {
         return "{" +
             " idVariante='" + getIdVariante() + "'" +
             ", etiqueta='" + getEtiqueta() + "'" +
-            ", Producto='" + getProducto() + "'" +
+            ", producto='" + getProducto() + "'" +
             "}";
     }
 

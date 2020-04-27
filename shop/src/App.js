@@ -19,6 +19,9 @@ import Confirm from './components/checkout/Confirm';
 import Admin from './components/admin/Admin';
 import Login from './components/admin/Login';
 
+import axios from './axios';
+import Producto from './components/product/Producto';
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -40,12 +43,17 @@ const theme = createMuiTheme({
 
 function App(props) {
   const [quantity, setQuantity] = useState();
+  let productos = [];
 
   useEffect(() => {
     const slug = `${config.store_slug}_products`;
     const items = JSON.parse(localStorage.getItem(slug));
     setQuantity(items ? items.length : 0);
   }, []);
+
+  axios.get('/productos').then(res=>{
+    productos = res.data;
+  })
 
   return (
     <StripeProvider apiKey={config.api_key}>
@@ -61,17 +69,7 @@ function App(props) {
               <Route exact path="/product"
                 render={(props) => <Products config={config} />}
               />
-              { config.products.map((product,i) =>
-                  <Route exact key={`route${i}`}
-                    path={`/product/${product.url}`} 
-                    render={(props) => 
-                      <Product product={product} config={config} 
-                        updateNumber={setQuantity}
-                      />
-                    }
-                  />
-                )
-              }
+              <Route exact path="/product/detalle/:id" component={Producto}/>
               <Route exact path="/cart"
                 render={(props) => <Cart config={config} updateNumber={setQuantity} />}
               />

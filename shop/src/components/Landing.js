@@ -4,7 +4,10 @@ import styled from 'styled-components';
 import PageWrapper from './ui/PageWrapper';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
-import ProductList from './product/ProductList';
+// import ProductList from './product/ProductList';
+
+// A partir de aqui son los componentes que creo
+import ListaProducto from './product/ListaProducto';
 
 const Hero = styled.div `
   height: 300px;
@@ -30,7 +33,7 @@ const Landing = ({ config }) => (
         </div>
       </Hero>
       <Divider style={{ margin: "40px 0" }}/>
-      <ProductList config={config} />
+      <ListaProducto/>
     </Paper>
   </PageWrapper>
 );

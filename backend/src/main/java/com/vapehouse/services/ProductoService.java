@@ -21,6 +21,10 @@ public class ProductoService {
         return productoRepository.getAllProductsByNumberOrder();
     }
 
+    public List<Producto> listarProductosActivos() {
+        return productoRepository.getActiveProductsByNumberOrder();
+    }
+
     public Producto editarProducto(Producto producto){
         return productoRepository.save(producto);
     }

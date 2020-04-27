@@ -11,7 +11,7 @@ deploy-backend:
     - cd backend
     - CI=false mvn clean package
     - cd target
-    - CI=false java -jar backend-0.0.1-SNAPSHOT.jar > /dev/null &
+    - CI=false java -jar backend-0.0.1-SNAPSHOT.jar & > /dev/null
 
 admin-deploy:
   stage: deploy-admin
@@ -31,7 +31,8 @@ shop-deploy:
     - master
   script:
     - cd shop
-    - npm run build
+    - CI=false npm install
+    - CI=false npm run build
     - rm -r /var/www/html/shop-build/*
     - cp -r build/* /var/www/html/shop-build
     - echo "Despliegue Shop completo !"

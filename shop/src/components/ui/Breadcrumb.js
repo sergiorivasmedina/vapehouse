@@ -26,7 +26,7 @@ const Breadcrumb = ({ product, theme }) => (
   <Wrapper>
     <Link to={'/product'}>{"All Products"}</Link>
     <Spacer color={theme.palette.primary.main}>&raquo;</Spacer>
-    <Link to={`/product/${product.url}`}>{product.name}</Link>
+    <Link to={`/product/${product.url}`}>{product.nombre}</Link>
   </Wrapper>
 );
 

@@ -1,5 +1,9 @@
 package com.vapehouse.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,6 +38,9 @@ public class Producto {
     @Column(name = "fechaRegistro")
     private String fechaRegistro;
 
+    @Column(name = "fotoPrincipal")
+    private String fotoPrincipal;
+
     @ManyToOne
     @JoinColumn(name = "idUsuario")
     private Usuario usuarioCreacion;
@@ -43,17 +51,26 @@ public class Producto {
     @Column(name = "estado")
     private Integer estado;
 
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    private List<Foto> foto;
+
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    private List<Detalle> detalle;
+
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    private List<Variante> variante;
 
     public Producto() {
     }
 
-    public Producto(Integer idProducto, Integer nOrden, String nombre, Double precio, String descripcion, String fechaRegistro, Usuario usuarioCreacion, Integer usuarioModificacion, Integer estado) {
+    public Producto(Integer idProducto, Integer nOrden, String nombre, Double precio, String descripcion, String fotoPrincipal, String fechaRegistro, Usuario usuarioCreacion, Integer usuarioModificacion, Integer estado) {
         this.idProducto = idProducto;
         this.nOrden = nOrden;
         this.nombre = nombre;
         this.precio = precio;
         this.descripcion = descripcion;
         this.fechaRegistro = fechaRegistro;
+        this.fotoPrincipal = fotoPrincipal;
         this.usuarioCreacion = usuarioCreacion;
         this.usuarioModificacion = usuarioModificacion;
         this.estado = estado;
@@ -97,6 +114,14 @@ public class Producto {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getFotoPrincipal() {
+        return this.fotoPrincipal;
+    }
+
+    public void setFotoPrincipal(String fotoPrincipal) {
+        this.fotoPrincipal = fotoPrincipal;
     }
 
     public String getFechaRegistro() {
@@ -144,5 +169,18 @@ public class Producto {
             ", usuarioModificacion='" + getUsuarioModificacion() + "'" +
             "}";
     }
-    
+
+
+    public List<Foto> getFoto() {
+        return this.foto;
+    }
+
+    public List<Detalle> getDetalle() {
+        return this.detalle;
+    }
+
+    public List<Variante> getVariante() {
+        return this.variante;
+    }
+       
 }

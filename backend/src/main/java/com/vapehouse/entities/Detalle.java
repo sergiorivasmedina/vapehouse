@@ -23,16 +23,16 @@ public class Detalle {
 
     @ManyToOne
     @JoinColumn(name = "idProducto")
-    private Producto Producto;
+    private Producto producto;
 
 
     public Detalle() {
     }
 
-    public Detalle(Integer idDetalle, String infoDetalle, Producto Producto) {
+    public Detalle(Integer idDetalle, String infoDetalle, Producto producto) {
         this.idDetalle = idDetalle;
         this.infoDetalle = infoDetalle;
-        this.Producto = Producto;
+        this.producto = producto;
     }
 
     public Integer getIdDetalle() {
@@ -51,12 +51,12 @@ public class Detalle {
         this.infoDetalle = infoDetalle;
     }
 
-    public Producto getProducto() {
-        return this.Producto;
-    }
+    // public Producto getProducto() {
+    //     return this.producto;
+    // }
 
-    public void setProducto(Producto Producto) {
-        this.Producto = Producto;
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class Detalle {
         return "{" +
             " idDetalle='" + getIdDetalle() + "'" +
             ", infoDetalle='" + getInfoDetalle() + "'" +
-            ", Producto='" + getProducto() + "'" +
+            ", producto='" + getProducto() + "'" +
             "}";
     }
     
