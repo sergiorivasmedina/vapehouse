@@ -10,11 +10,13 @@ import com.vapehouse.services.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
@@ -32,6 +34,12 @@ public class ProductoController {
     @GetMapping(value="/productos/activos")
     public List<Producto> listarproductosActivos() {
         return productoService.listarProductosActivos();
+    }
+
+    @GetMapping(value="/producto/{idProducto}")
+    @ResponseBody
+    public Producto getProductoById(@PathVariable Integer idProducto) {
+        return productoService.getProductoById(idProducto);
     }
 
     @PostMapping(value="/producto/editar")

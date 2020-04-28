@@ -45,8 +45,6 @@ class ListaProducto extends Component {
         
         axios.get('/productos/activos').then(res => {
             this.setState({productos: res.data});
-            console.log(this.state.productos[0].foto[0].urlFoto)
-            console.log(this.state.productos[0].fotoPrincipal)
         })
     }
 

@@ -25,6 +25,10 @@ public class ProductoService {
         return productoRepository.getActiveProductsByNumberOrder();
     }
 
+    public Producto getProductoById(Integer idProducto) {
+        return productoRepository.getProductoById(idProducto);
+    }
+
     public Producto editarProducto(Producto producto){
         return productoRepository.save(producto);
     }

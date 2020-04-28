@@ -27,14 +27,18 @@ class Producto extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          idProducto: -1
+          idProducto: -1,
+          producto: ''
         }
         
     }
 
-    componentDidMount() {
+    componentWillMount() {
       const { id } = this.props.match.params;
-      this.setState({ idProducto: id});
+
+      axios.get('/producto/'+id).then(res => {
+        this.setState({ producto: res.data });
+      })
     }
 
     render() {
@@ -42,20 +46,21 @@ class Producto extends Component {
             <PageWrapper>
                 <Paper>
                     <Wrapper>
-                    <Breadcrumb product='10' />
+                    <Breadcrumb product={this.state.producto} />
                     <Grid>
                         {/* {photos} */}
-                        {/* <div style={{ gridColumn: "span 2" }}>
+                        <div style={{ gridColumn: "span 2" }}>
                         <ProductDetails
-                            product={this.props.}
-                            quantity='1'
-                            setQuantity='2'
-                            variants='3'
-                            price='12'
-                            updateSkuPrice='4'
-                            addToCart='5'
-                        />
-                        </div> */}
+                          product={this.state.producto}
+                          // quantity='1'
+                          // setQuantity='2'
+                          // variants='3'
+                          // price='12'
+                          // updateSkuPrice='4'
+                          // addToCart='5'
+                          />
+                        
+                        </div>
                     </Grid>
                     </Wrapper>
                 </Paper>

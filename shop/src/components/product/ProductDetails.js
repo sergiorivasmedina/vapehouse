@@ -46,65 +46,80 @@ const Details = styled.div `
 class ProductDetails extends Component{
   constructor(props) {
     super(props);
+    this.state = {
+      variante: []
+    }
+  }
+
+  componentWillMount() {
+    console.log("variante: "+this.props.product)
+    this.setState({variante: this.props.product.variante})
   }
 
   render() {
-    return (
-      <div>
-          {/* <h2 style={{ marginTop: "0" }}>{product.name}</h2>
-          <Description>{product.description}</Description>
-          { !!variants.length &&
-            <FlexWrapper>
-              {variants.map((variant,i) => {
-                return <Row key={i}>
-                  <label>{variant.name.replace("_"," ")}</label>
-                  <Select
-                    native
-                    value={product[variant.name]}
-                    onChange={handleChange(variant.name)}
-                    style={{ width: "155px", fontSize: "14px", height: "29px" }}
-                  >
-                    { variant.options.map((option,j) => {
-                      if (isNaN(option.label)) {
-                        option.label = option.label.charAt(0).toUpperCase() + option.label.slice(1);
-                      }
-                      return <option key={j} value={option.label}
-                        sku_id={option.sku_id} price={option.price}
-                      >{option.label}</option>
-                    })}
-                  </Select>
-                </Row>
-              })}
-            </FlexWrapper>
-          }
-          <div style={{ fontWeight: "600", textAlign: "right" }}>
-            ${props.price}
+    if(typeof this.props.product.variante !== "undefined") {
+
+      return (
+        <div>
+            <h2 style={{ marginTop: "0" }}>{this.props.product.nombre}</h2>
+            <Description>{this.props.product.descripcion}</Description>
+      <label>{this.props.product.variante[0].etiqueta}</label>
+  
+            {/* <FlexWrapper>
+            { this.props.product.variante.map((variant,i) => {
+                  return <Row key={i}>
+                    <label>{variant.etiqueta}</label>
+                    <Select
+                      native
+                      value={product[variant.etiqueta]}
+                      onChange={handleChange(variant.name)}
+                      style={{ width: "155px", fontSize: "14px", height: "29px" }}
+                    >
+                      { variant.options.map((option,j) => {
+                        if (isNaN(option.label)) {
+                          option.label = option.label.charAt(0).toUpperCase() + option.label.slice(1);
+                        }
+                        return <option key={j} value={option.label}
+                          sku_id={option.sku_id} price={option.price}
+                        >{option.label}</option>
+                      })}
+                    </Select>
+                  </Row>
+                })
+            }
+            </FlexWrapper> */}
+  
+            <div style={{ fontWeight: "600", textAlign: "right" }}>
+              S/ {this.props.product.precio}
+            </div>
+            {/* <Right>
+              <Button variant="contained" color="primary"
+                onClick={() => props.addToCart(product)}
+              >
+                Add To Cart
+              </Button>
+              <TextField
+                value={props.quantity}
+                onChange={e => props.setQuantity(e.target.value)}
+                type="number"
+                margin="normal"
+                style={{ width: "40px", margin: "0 30px 0" }}
+              />
+            </Right> */}
+            {/* { product.details &&
+              <Details>
+                <ul>
+                  {product.details.map((detail,i) =>
+                    <li key={i}>{detail}</li>
+                  )}
+                </ul>
+              </Details>
+            } */}
           </div>
-          <Right>
-            <Button variant="contained" color="primary"
-              onClick={() => props.addToCart(product)}
-            >
-              Add To Cart
-            </Button>
-            <TextField
-              value={props.quantity}
-              onChange={e => props.setQuantity(e.target.value)}
-              type="number"
-              margin="normal"
-              style={{ width: "40px", margin: "0 30px 0" }}
-            />
-          </Right>
-          { product.details &&
-            <Details>
-              <ul>
-                {product.details.map((detail,i) =>
-                  <li key={i}>{detail}</li>
-                )}
-              </ul>
-            </Details>
-          } */}
-        </div>
-    );
+      );
+
+    } else {return <h1>Cargando...</h1>}
+    
   }
 
 }
