@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div `
@@ -22,7 +22,7 @@ const LargeIMG = styled.div `
   background-image: url(${props => props.img});
   background-color: #eee;
   width: 100%;
-  padding-bottom: 133%;
+  padding-bottom: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 50% 0;
@@ -30,22 +30,42 @@ const LargeIMG = styled.div `
   grid-column: span 3;
 `;
 
-function Carousel({ photos, url }) {
-  const [img, setImg] = useState(photos[0]);
 
-  return (
-    <Wrapper>
-      <div>
-        {photos.map((p,i) => {
-          return <IMG
-            onClick={() => setImg(p)}
-            img={`../photos/${url}/${p}`} key={i}
-          />
-        })}
-      </div>
-      <LargeIMG img={`../photos/${url}/${img}`} />
-    </Wrapper>
-  );
-};
+class Carousel extends Component {
+
+  constructor(props){
+    super(props);
+    this.state= {
+      index: 0
+    }
+    
+  }
+
+  setImg(idFoto) {
+    this.setState({ index: idFoto-1 })
+  }
+
+  render() {
+    if(typeof this.props.photos !== "undefined") {
+      
+      return (
+        <Wrapper>
+          <div>
+            {this.props.photos.map((p,i) => {
+              return <IMG
+                onClick={this.setImg.bind(this,p.idFoto)}
+                img={p.urlFoto} key={i}
+              />
+            })}
+          </div>
+          <LargeIMG img={this.props.photos[this.state.index].urlFoto} />
+        </Wrapper>
+      );
+    } else {
+      return <h4>Cargando...</h4>
+    }
+    
+  }
+}
 
 export default Carousel;

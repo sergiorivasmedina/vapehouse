@@ -53,7 +53,7 @@ class ListaProducto extends Component {
             <Wrapper>
                 { this.state.productos.map((product,i) => {
                     return <Link key={i} to={"/product/detalle/" + product.idProducto}>
-                      {product.foto.length > 0 && <LandingProductImage fotoPrincipal={product.foto[0].urlFoto}></LandingProductImage>}
+                      <LandingProductImage fotoPrincipal={product.fotoPrincipal}></LandingProductImage>
                     
                     <Title>
                         {product.nombre}

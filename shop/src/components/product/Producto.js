@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 import PageWrapper from '../ui/PageWrapper';
 import Paper from '@material-ui/core/Paper';
 import Breadcrumb from '../ui/Breadcrumb';
 import ProductDetails from './ProductDetails';
+import Carousel from '../ui/Carousel';
+import MobileCarousel from '../ui/MobileCarousel';
 import axios from '../../axios';
 
 const Wrapper = styled.div `
@@ -42,22 +45,24 @@ class Producto extends Component {
     }
 
     render() {
+      let photos;
+      // if (isWidthUp('sm', this.props.width)) {
+      //   photos = <Carousel photos={this.state.producto.foto} url='hola.com' />;
+      // } else {
+      //   photos = <MobileCarousel photos={this.state.producto.foto} url='hola.com' />;
+      // }
+      photos = <Carousel photos={this.state.producto.foto} url='hola.com' />;
+
         return (
             <PageWrapper>
                 <Paper>
                     <Wrapper>
                     <Breadcrumb product={this.state.producto} />
                     <Grid>
-                        {/* {photos} */}
+                        {photos}
                         <div style={{ gridColumn: "span 2" }}>
                         <ProductDetails
                           product={this.state.producto}
-                          // quantity='1'
-                          // setQuantity='2'
-                          // variants='3'
-                          // price='12'
-                          // updateSkuPrice='4'
-                          // addToCart='5'
                           />
                         
                         </div>

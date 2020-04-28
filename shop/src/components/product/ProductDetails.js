@@ -47,78 +47,91 @@ class ProductDetails extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      variante: []
+      variante: [],
+      cantidad: 1,
+      indexVariante: 0
     }
   }
 
   componentWillMount() {
-    console.log("variante: "+this.props.product)
     this.setState({variante: this.props.product.variante})
+  }
+
+  actualizarCantidad(event) {
+    if ((event.target.value) < 1){
+      return;
+    } else {
+      this.setState({cantidad: event.target.value})
+    }
+    
+  }
+
+  handleChange(event) {
+    let opcion = event.target.childNodes[event.target.selectedIndex].getAttribute('value');
+  }
+
+  carrito(){
+    alert("Falta implementar xD")
   }
 
   render() {
     if(typeof this.props.product.variante !== "undefined") {
-
       return (
         <div>
             <h2 style={{ marginTop: "0" }}>{this.props.product.nombre}</h2>
             <Description>{this.props.product.descripcion}</Description>
-      <label>{this.props.product.variante[0].etiqueta}</label>
   
-            {/* <FlexWrapper>
-            { this.props.product.variante.map((variant,i) => {
-                  return <Row key={i}>
-                    <label>{variant.etiqueta}</label>
-                    <Select
-                      native
-                      value={product[variant.etiqueta]}
-                      onChange={handleChange(variant.name)}
-                      style={{ width: "155px", fontSize: "14px", height: "29px" }}
-                    >
-                      { variant.options.map((option,j) => {
-                        if (isNaN(option.label)) {
-                          option.label = option.label.charAt(0).toUpperCase() + option.label.slice(1);
-                        }
-                        return <option key={j} value={option.label}
-                          sku_id={option.sku_id} price={option.price}
-                        >{option.label}</option>
-                      })}
-                    </Select>
-                  </Row>
-                })
+            {this.props.product.variante.length > 0 &&
+            <FlexWrapper>
+            <label>Modelo: </label>
+            <Select
+              native
+              value={this.selectedOption}
+              onChange={this.handleChange.bind(this)}
+              style={{ width: "155px", fontSize: "14px", height: "29px" }}
+            >
+              { this.props.product.variante.map((option,j) => {
+                return <option key={j} value={option.etiqueta}
+                >
+                  {option.etiqueta}</option>
+              })}
+            </Select>
+          </FlexWrapper>}
+            
+
+            { this.props.product.detalle &&
+              <Details>
+                <ul>
+                  {this.props.product.detalle.map((detail,i) =>
+                    <li key={i}>{detail.infoDetalle}</li>
+                  )}
+                </ul>
+              </Details>
             }
-            </FlexWrapper> */}
+            
   
             <div style={{ fontWeight: "600", textAlign: "right" }}>
               S/ {this.props.product.precio}
             </div>
-            {/* <Right>
+            <Right>
               <Button variant="contained" color="primary"
-                onClick={() => props.addToCart(product)}
+                onClick={this.carrito.bind(this)}
               >
                 Add To Cart
               </Button>
               <TextField
-                value={props.quantity}
-                onChange={e => props.setQuantity(e.target.value)}
+                value= {this.state.cantidad}
+                onChange={this.actualizarCantidad.bind(this)}
                 type="number"
                 margin="normal"
                 style={{ width: "40px", margin: "0 30px 0" }}
               />
-            </Right> */}
-            {/* { product.details &&
-              <Details>
-                <ul>
-                  {product.details.map((detail,i) =>
-                    <li key={i}>{detail}</li>
-                  )}
-                </ul>
-              </Details>
-            } */}
+            </Right>
+            
           </div>
       );
 
-    } else {return <h1>Cargando...</h1>}
+    } else {return <h4>Cargando...</h4>}
     
   }
 
