@@ -125,6 +125,7 @@ class Producto extends Component {
             norden: document.getElementById('nuevoNOrden').value,
             descripcion: document.getElementById('nuevaDescripcion').value,
             fechaRegistro: producto.fechaRegistro,
+            fotoPrincipal: producto.fotoPrincipal,
             estado: producto.estado
         }
 
@@ -134,6 +135,9 @@ class Producto extends Component {
             var index_actualizar = this.state.productos.findIndex(x=> x.idProducto === producto.idProducto);
             let prodArray = this.state.productos.slice();
             prodArray[index_actualizar].nombre = prod.nombre;
+            prodArray[index_actualizar].precio = prod.precio;
+            prodArray[index_actualizar].norden = prod.norden;
+            prodArray[index_actualizar].descripcion = prod.descripcion;
             this.setState({productos: prodArray});
             this.setState({idProducto: -1});
         })

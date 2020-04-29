@@ -43,11 +43,7 @@ class LineaProducto extends Component {
                         className={'modal-info ' + this.props.className}>
                     <ModalHeader toggle={this.togglePrimary}>Ver / Editar fotos del producto</ModalHeader>
                     <ModalBody>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.
+                        Aquí se mostraría las opciones para añadir las fotos del producto.
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.togglePrimary}>Guardar</Button>{' '}
@@ -63,11 +59,7 @@ class LineaProducto extends Component {
                         className={'modal-info ' + this.props.className}>
                     <ModalHeader toggle={this.togglePrimary2}>Ver / Editar detalles del producto</ModalHeader>
                     <ModalBody>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.
+                        Aqué se añadiría las opciones para mostrar los detalles y variantes que tenga el producto.
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.togglePrimary2}>Guardar</Button>{' '}
