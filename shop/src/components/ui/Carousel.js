@@ -46,7 +46,7 @@ class Carousel extends Component {
   }
 
   render() {
-    if(typeof this.props.photos !== "undefined") {
+    if(typeof this.props.photos !== "undefined" && typeof this.props.photos[this.state.index].urlFoto != "undefined") {
       
       return (
         <Wrapper>
